@@ -1,35 +1,43 @@
 from appJar import gui
-from random import randint
-app = gui("Buttons", "300x150")
-nummer1 = 0
-nummer2 = 0
-antwoord = 0
-streak = 0
-def nieuwesom():
-    global nummer1,nummer2
-    nummer1 = randint(1,10)
-    nummer2 = randint(1,10)
-    uitkomst = nummer1 * nummer2
-    app.setLabel("som", f"{nummer1} * {nummer2} =")
-    app.clearEntry("Uitkomst")
-    app.setLabel("goed", "")
-    
-def controleer(name):
-    global antwoord, streak
-    antwoord = app.getEntry("Uitkomst")
-    antwoord = int(app.getEntry("Uitkomst"))
-    if antwoord == nummer1 * nummer2:
-      
-      streak += 1
-      app.setLabel("goed", f"goed (streak #{streak})")
-      app.after(2000, nieuwesom)
-      
-    else:
-        app.setLabel("goed", "fout")
-        streak = 0
-app.addLabelEntry("Uitkomst")
-app.addButton("controleer", controleer)
-app.addButton("genereer", nieuwesom)
-app.addLabel("som", "")
-app.addLabel("goed", "")
+import random
+  
+def genereerWachtwoord(name):
+  lengte = int(app.getOptionBox("lengte"))
+  tekens = ""
+  wachtwoord = ""
+  
+  # Kleine letters?
+  if app.getCheckBox("Kleine letters"):
+    tekens = tekens + "abcdefghijklmnopqrstuvwxyz"
+  # Hoofdletters
+  if app.getCheckBox("Hoofdletters"):
+    tekens = tekens + "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+  # Cijfers
+  if app.getCheckBox("Cijfers"):
+    tekens = tekens + "0123456789"
+  # Tekens
+  if app.getCheckBox("Tekens"):
+    tekens = tekens + "!@#$%^&amp;*()-+{}[];:\|/?"
+  
+  # Genereer
+  for x in range(lengte):
+    teken = random.choice(tekens)
+    wachtwoord = wachtwoord + teken
+  
+  # Plaats in textbox
+  app.setEntry("ww", wachtwoord)
+  
+  
+# De app
+app = gui("Wachtwoordgenerator", "400x200")
+  
+app.addLabel("lb1", "Wachtwoordgenerator", 0, 0, 2, 0)
+app.addEntry("ww", 1, 0, 2, 0)
+app.addOptionBox("lengte", ["- Lengte -", "16", "20", "24", "28", "32"], 2, 0)
+app.addButton("Genereren", genereerWachtwoord, 4, 0)
+app.addCheckBox("Kleine letters", 2, 1)
+app.addCheckBox("Hoofdletters", 3, 1)
+app.addCheckBox("Cijfers", 4, 1)
+app.addCheckBox("Tekens", 5, 1)
+  
 app.go()
