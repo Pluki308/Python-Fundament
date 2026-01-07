@@ -15,7 +15,7 @@ def genereerWachtwoord(name):
   # Cijfers
   if app.getCheckBox("Cijfers"):
     tekens = tekens + "0123456789"
-  # Tekens
+  # Tekensn
   if app.getCheckBox("Tekens"):
     tekens = tekens + "!@#$%^&amp;*()-+{}[];:\|/?"
   
