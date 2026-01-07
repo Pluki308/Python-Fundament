@@ -24,13 +24,13 @@ def checkWin():
             current_set+=(app.getButton(f'box{i+1}'))
         else:
             current_set+='_'
-    print(current_set)
+    print(f'{current_set[0]+current_set[1]+current_set[2]}\n{current_set[3]+current_set[4]+current_set[5]}\n{current_set[6]+current_set[7]+current_set[8]}\n')
 
 
 ''' de boxes zijn zo:
-147
-258
-369
+123
+456
+789
 
 OOO     ___     ___     O__     _O_     __O     O__     __O
 ___     OOO     ___     O__     _O_     __O     _O_     _O_
@@ -60,8 +60,19 @@ app.setBg("#c7c7c7")
 
 app.addLabel("intro", "TicTacToe",0,0,colspan=3)
 for i in range(9):
-    app.addButton(f'box{i+1}',buttonClick,i%3+1,i//3)
+    app.addButton(f'box{i+1}',buttonClick,i//3+1,i%3)
 
+'''
+app.addButton('box1',buttonClick,1,0)
+app.addButton('box4',buttonClick,1,1)
+app.addButton('box7',buttonClick,1,2)
+app.addButton('box2',buttonClick,2,0)
+app.addButton('box5',buttonClick,2,1)
+app.addButton('box8',buttonClick,2,2)
+app.addButton('box3',buttonClick,3,0)
+app.addButton('box6',buttonClick,3,1)
+app.addButton('box9',buttonClick,3,2)
+'''
 
 reset()
 checkWin()
