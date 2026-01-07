@@ -14,6 +14,26 @@ def buttonClick(naam):
         app.setLabel('intro','Al ingevoerd.')
         app.after(1000,lambda: app.setLabel('intro','TikTacToe'))
 
+def checkWin():
+    winning_sets=['OOO______','___OOO___','______OOO','O__O__O__','_O__O__O_','__O__O__O','O___O___O','__O_O_O__']
+    box1=app.getButton('box1')
+    box2=app.getButton('box2')
+    box3=app.getButton('box3')
+    box4=app.getButton('box4')
+    box5=app.getButton('box5')
+    box6=app.getButton('box6')
+    box7=app.getButton('box7')
+    box8=app.getButton('box8')
+    box9=app.getButton('box9')
+
+
+'''
+OOO     ___     ___     O__     _O_     __O     O__     __O
+___     OOO     ___     O__     _O_     __O     _O_     _O_
+___     ___     OOO     O__     _O_     __O     __O     O__
+
+'''
+
 def reset():
     global selected
     selected='X'
