@@ -1,4 +1,4 @@
-
+#
 def genereren():
     antwoord = app.getEntry("antwoord")
     if str(antwoord) == str(nummer2*nummer1):
