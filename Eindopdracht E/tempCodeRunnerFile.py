@@ -1,1 +1,0 @@
-f[0] for f in filmkeuzes
