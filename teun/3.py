@@ -13,8 +13,6 @@ def reset():
 
 reset()
 
-
-
 app.addButton('raden',raden,3,0)
 app.addButton('reset',reset)
 app.addLabel('label1','raad een getal tussen de 1 en de 100',0,0,2)

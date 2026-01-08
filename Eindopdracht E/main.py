@@ -1,24 +1,64 @@
-import random
+"""
+Variant E – Bioscoopticketautomaat
 
-filmkeuzes=[['oppenheimer',50], ['zoolander',30], ['help!',25]]
-filmnamen = [f[0] for f in filmkeuzes]
-film=''
-leeftijdscategoriekeuzes=[['kind',5],['volwassene',8],['student/65+',6]]
-leeftijdsnamen = [l[0] for l in leeftijdscategoriekeuzes]
-leeftijdscategorie=''
-selecting_movie=True
-selecting_age=False
-while True:
-    # selecteer de films
-    if (film not in filmnamen) and selecting_movie:
-        film=input(f'Welke film wil je kiezen? kies uit {", ".join(f[0].capitalize() for f in filmkeuzes)}: ').lower()
-    elif (film in filmnamen) and selecting_movie:
-        print(f'U heeft geselecteerd: {film.capitalize()}')
-        selecting_movie=False
-        selecting_age=True
-    elif (leeftijdscategorie not in leeftijdsnamen) and selecting_age:
-        leeftijdscategorie=input(f'Welke film wil je kiezen? kies uit {", ".join(l[0].capitalize() for l in leeftijdscategoriekeuzes)}: ').lower()
-    elif (leeftijdscategorie in leeftijdsnamen) and selecting_age: 
-        print(f'U heeft geselecteerd: {leeftijdscategorie.capitalize()}')
-        selecting_age=False
-        break
+Laat gebruikers een film kiezen (3 opties) en een tijdslot. 
+Tickets verschillen in prijs per leeftijdscategorie: 
+kind (€5), volwassene (€8), student/65+ (€6). Elke film heeft een maximumcapaciteit. 
+Simuleer 30 klanten en geef inzicht in: hoeveel tickets per film, welke categorieën het meest kopen, 
+en hoe vaak 'uitverkocht' voorkomt. 
+"""
+
+from appJar import gui
+app=gui('Bioscoopticketautomaat','600x300')
+
+filmCapaciteiten=None
+
+def koop(name):
+    global filmCapaciteiten
+    filmkeuze=str(app.getOptionBox('filmkeuzes'))
+    if filmkeuze and filmCapaciteiten==None:
+        filmCapaciteiten={
+            'Oppenheimer':30,
+            'Help!':20,
+            'Avatar':50,
+        }
+        capaciteit=filmCapaciteiten[filmkeuze]
+    elif filmkeuze:
+        capaciteit=filmCapaciteiten[filmkeuze]
+    else:
+        capaciteit=0
+    
+    kind=int(app.getSpinBox('kind'))
+    volwassene=int(app.getSpinBox('volwassene'))
+    student65=int(app.getSpinBox('student/65+'))
+    if kind+volwassene+student65<=capaciteit:
+        filmCapaciteiten[filmkeuze]-=kind+volwassene+student65
+        app.setLabel('capaciteit',f'Nog {filmCapaciteiten[filmkeuze]} plaatsen beschikbaar')
+        app.setLabel('intro','Transactie succesvol!')
+        app.after(3000, lambda: app.setLabel('intro','Bioscoopticketautomaat'))
+        with open('Eindopdracht E/tickets.txt','a') as f:
+            #f.write(f'{filmkeuze}: {kind} kinderen, {volwassene} volwassenen, {student65} studenten/65+\'ers totale prijs: €{kind*5+volwassene*8+student65*6}\n')
+            f.write(f'{filmkeuze}, {kind}, {volwassene}, {student65}\n')
+
+def resetTickets(name):
+    with open('Eindopdracht E/tickets.txt','w') as f:
+        f.write(f'')
+
+
+app.setBg("#c7c7c7")
+
+
+app.addLabel('intro','Bioscoopticketautomaat')
+app.addLabel('capaciteit','Nog 0 plaatsen beschikbaar')
+app.addOptionBox('filmkeuzes',['-Films-','Oppenheimer','Help!','Avatar'])
+app.addLabel('kindlabel','Aantal kinderen (€5)')
+app.addSpinBoxRange('kind',0,128)
+app.addLabel('volwassenelabel','Aantal volwassenen (€8)')
+app.addSpinBoxRange('volwassene',0,128)
+app.addLabel('student/65+label','Aantal studenten/65+\'ers (€6)')
+app.addSpinBoxRange('student/65+',0,128)
+app.addButton('koop',koop)
+app.addButton('reset tickets',resetTickets)
+
+
+app.go()
