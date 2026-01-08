@@ -1,30 +1,20 @@
-Oppenheimer, 2, 3, 0
-Help!, 1, 0, 4
-Avatar, 2, 2, 2
-Avatar, 1, 2, 2
-Avatar, 0, 0, 0Help!, 0, 0, 0
-Oppenheimer, 1, 0, 0
-Oppenheimer, 1, 0, 0
-Oppenheimer, 1, 0, 0
-Oppenheimer, 1, 0, 0
-Help!, 10, 0, 0
-Oppenheimer, 1, 0, 0
-Oppenheimer, 2, 0, 0
-Oppenheimer, 2, 0, 0
-Oppenheimer, 2, 0, 0
-Oppenheimer, 2, 0, 0
-Oppenheimer, 2, 0, 0
-Oppenheimer, 2, 0, 0
-Oppenheimer, 2, 0, 0
-Oppenheimer, 2, 0, 0
-Oppenheimer, 2, 0, 0
-Oppenheimer, 2, 0, 0
-Oppenheimer, 2, 0, 0
-Oppenheimer, 2, 0, 0
-Oppenheimer, 2, 0, 0
-Oppenheimer, 2, 0, 0
-Oppenheimer, 2, 0, 0
-Help!, 2, 3, 0
-Help!, 2, 3, 0
-Help!, 2, 3, 0
-Help!, 2, 3, 0
+Oppenheimer: 1 kinderen, 1 volwassenen, 1 studenten/65+'ers totale prijs: €19. Plaatsen over: 37
+Oppenheimer: 1 kinderen, 2 volwassenen, 1 studenten/65+'ers totale prijs: €27. Plaatsen over: 33
+Oppenheimer: 0 kinderen, 2 volwassenen, 1 studenten/65+'ers totale prijs: €22. Plaatsen over: 30
+Oppenheimer: 2 kinderen, 1 volwassenen, 1 studenten/65+'ers totale prijs: €24. Plaatsen over: 26
+Avatar: 1 kinderen, 3 volwassenen, 2 studenten/65+'ers totale prijs: €41. Plaatsen over: 44
+Dune: 3 kinderen, 2 volwassenen, 1 studenten/65+'ers totale prijs: €37. Plaatsen over: 24
+Oppenheimer: 1 kinderen, 3 volwassenen, 2 studenten/65+'ers totale prijs: €41. Plaatsen over: 20
+Oppenheimer: 0 kinderen, 3 volwassenen, 0 studenten/65+'ers totale prijs: €24. Plaatsen over: 17
+Avatar: 3 kinderen, 2 volwassenen, 0 studenten/65+'ers totale prijs: €31. Plaatsen over: 39
+Avatar: 2 kinderen, 0 volwassenen, 0 studenten/65+'ers totale prijs: €10. Plaatsen over: 37
+Oppenheimer: 1 kinderen, 2 volwassenen, 0 studenten/65+'ers totale prijs: €21. Plaatsen over: 14
+Avatar: 3 kinderen, 2 volwassenen, 1 studenten/65+'ers totale prijs: €37. Plaatsen over: 31
+Oppenheimer: 0 kinderen, 2 volwassenen, 1 studenten/65+'ers totale prijs: €22. Plaatsen over: 11
+Avatar: 1 kinderen, 0 volwassenen, 3 studenten/65+'ers totale prijs: €23. Plaatsen over: 27
+Oppenheimer: 0 kinderen, 1 volwassenen, 3 studenten/65+'ers totale prijs: €26. Plaatsen over: 7
+Oppenheimer: 1 kinderen, 0 volwassenen, 1 studenten/65+'ers totale prijs: €11. Plaatsen over: 5
+GEFAALD, TE WEINIG PLAATSEN: Oppenheimer: 2 kinderen, 3 volwassenen, 3 studenten/65+'ers totale prijs: €52. Plaatsen over: -3
+Oppenheimer: 3 kinderen, 2 volwassenen, 0 studenten/65+'ers totale prijs: €31. Plaatsen over: 0
+Dune: 0 kinderen, 3 volwassenen, 1 studenten/65+'ers totale prijs: €30. Plaatsen over: 20
+GEFAALD, TE WEINIG PLAATSEN: Oppenheimer: 2 kinderen, 2 volwassenen, 0 studenten/65+'ers totale prijs: €26. Plaatsen over: -4
