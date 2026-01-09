@@ -2,9 +2,9 @@ import random
 
 class Klant():
     def __init__(self, kinderen, volwassenen, studenten65, films):
-        self.kinderen = kinderen
-        self.volwassenen = volwassenen
-        self.studenten65 = studenten65
+        self.kinderen = int(kinderen)
+        self.volwassenen = int(volwassenen)
+        self.studenten65 = int(studenten65)
 
         self.film = random.choice(list(films.keys()))
         self.tijdslot = random.choice(list(films[self.film].keys()))
