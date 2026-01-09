@@ -9,7 +9,7 @@ Klik op de knop "Install", de bibliotheek wordt nu geïnstalleerd. Dit kan even 
   
 Nadat de bibliotheek is geïnstalleerd, verschijnt er geen melding. Je kunt echter wel zien dat het gelukt is, omdat appjar nu in de lijst aan de linkerkant staat..
  
-Nu dat je Thonny hebt geinstalleerd, kan je de python file openen met Thonny. In de menubalk staat een knop met een groen pijltje genaamd ‘run’ en als u daarop drukt wordt de code uitgevoerd
+Nu dat je Thonny hebt geinstalleerd, kan je main.py en main_no_simulation openen met Thonny. In de menubalk staat een knop met een groen pijltje genaamd ‘run’ en als u daarop drukt wordt de code uitgevoerd
 Als u python al heeft geïnstaleerd
 1.	Open en run ‘installAppJar.bat’
 2.	Open en run ‘start.bat’ om de python file te starten
