@@ -14,7 +14,7 @@ import random
 
 import os
 import sys
-
+#nodig om tickets.txt te vinden
 def resource_path(filename):
     if hasattr(sys, '_MEIPASS'):
         return os.path.join(sys._MEIPASS, filename)
