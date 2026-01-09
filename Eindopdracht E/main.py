@@ -41,25 +41,29 @@ app=gui('Bioscoopticketautomaat','600x300')
 
 filmCapaciteiten = {
     'Oppenheimer': {
-        '13:00': 30,
+        '13:00': 20,
         '15:00': 25,
         '17:00': 25,
     },
     'Dune': {
-        '18:30': 35,
-        '19:00': 35,
+        '18:30': 25,
+        '19:00': 25,
         '20:00': 30,
     },
     'Avatar': {
-        '8:00': 40,
-        '12:00': 35,
-        '16:00': 50,
+        '8:00': 20,
+        '12:00': 15,
+        '16:00': 30,
     }
 }
-
+uitverkocht={
+    'Oppenheimer': 0,
+    'Dune': 0,
+    'Avatar': 0
+}
 
 def koop(name,gesimuleerd=False,klant=None):
-    global filmCapaciteiten
+    global filmCapaciteiten,uitverkocht
 
     if gesimuleerd and klant:
         filmkeuze=klant.film
@@ -68,11 +72,13 @@ def koop(name,gesimuleerd=False,klant=None):
         volwassene=klant.volwassenen
         student65=klant.studenten65
     else:
+        
         filmkeuze=str(app.getOptionBox('filmkeuzes'))
         tijdslot=str(app.getOptionBox('tijdslot'))
         kind=int(app.getSpinBox('kind'))
         volwassene=int(app.getSpinBox('volwassene'))
         student65=int(app.getSpinBox('student/65+'))
+        klanten.append(Klant(kind,volwassene,student65,filmCapaciteiten))
         
     if filmkeuze:
         capaciteit=filmCapaciteiten[filmkeuze][tijdslot]
@@ -92,7 +98,9 @@ def koop(name,gesimuleerd=False,klant=None):
 
             #f.write(f'{filmkeuze}, {kind}, {volwassene}, {student65}\n')
     else:
+        uitverkocht[filmkeuze]+=1
         if not gesimuleerd:
+            
             app.setLabel('intro','Transactie onsuccesvol! Er zijn niet genoeg plaatsen bij de film.')
             app.after(5000, lambda: app.setLabel('intro','Bioscoopticketautomaat'))
         with open('Eindopdracht E/tickets.txt','a') as f:
@@ -121,7 +129,7 @@ def film_veranderd(naam):
         app.setLabel('capaciteit', 'Nog niets geselecteerd!')
 
 def analyseer(naam):
-    global klanten
+    global klanten,uitverkocht
     app.hideFrame('kopen')
     app.showFrame('analyse')
     klantennummers={
@@ -143,17 +151,17 @@ def analyseer(naam):
     app.setLabel('studenten65',f'aantal studenten/65+\'ers: {klantennummers["studenten65"]}')
     app.setLabel('aantalMensen',f'aantal mensen in totaal: {int(klantennummers["kinderen"])+int(klantennummers["volwassenen"])+int(klantennummers["studenten65"])}')
     meeste_film = max(filmnummers,key=filmnummers.get)
-    app.setLabel('Oppenheimer',f'aantal Oppenheimer: {filmnummers["Oppenheimer"]}')
-    app.setLabel('Dune',f'aantal Dune: {filmnummers["Dune"]}')
-    app.setLabel('Avatar',f'aantal Avatar: {filmnummers["Avatar"]}')
-    app.setLabel('film',f'meest gekozen film: {meeste_film}')
+    app.setLabel('Oppenheimer',f'aantal Oppenheimer: {filmnummers["Oppenheimer"]}, aantal keer uitverkocht: {uitverkocht["Oppenheimer"]}')
+    app.setLabel('Dune',f'aantal Dune: {filmnummers["Dune"]}, aantal keer uitverkocht: {uitverkocht["Dune"]}')
+    app.setLabel('Avatar',f'aantal Avatar: {filmnummers["Avatar"]}, aantal keer uitverkocht: {uitverkocht["Avatar"]}')
+    app.setLabel('film',f'meest gekozen film: {meeste_film}, aantal keer uitverkocht in totaal: {uitverkocht["Oppenheimer"]+uitverkocht["Dune"]+uitverkocht["Avatar"]}')
     
     
 
     
 oudefilm=''
 
-simulerend=True
+simulerend=False
 
 app.startFrame('kopen')
 app.setBg("#c7c7c7")
@@ -170,8 +178,9 @@ app.addSpinBoxRange('volwassene',0,128)
 app.addLabel('student/65+label','Aantal studenten/65+\'ers (€6)')
 app.addSpinBoxRange('student/65+',0,128)
 app.addButton('koop',koop)
-app.addButton('reset tickets',resetlog)
-if simuleer:
+app.addButton('stop',lambda: app.stop())
+#app.addButton('reset tickets',resetlog)
+if simulerend:
     app.addButton('analyse',analyseer)
 app.setOptionBoxChangeFunction('filmkeuzes', film_veranderd)
 app.setOptionBoxChangeFunction('tijdslot', film_veranderd)
@@ -191,8 +200,9 @@ app.hideFrame('analyse')
 
 
 if simulerend:
+    aantalKlanten=30
     resetlog()
-    klanten=simuleer(20,filmCapaciteiten)
+    klanten=simuleer(aantalKlanten,filmCapaciteiten)
     for klant in klanten:
         koop('',True,klant)
 

@@ -1,20 +1,16 @@
-filmCapaciteiten = {
-  'Oppenheimer': {
-      '15:00': 40,
-      '17:00': 40,
-      '21:00': 40,
-  },
-  'Dune': {
-      '15:00': 30,
-      '17:00': 30,
-      '21:00': 30,
-  },
-  'Avatar': {
-      '15:00': 50,
-      '17:00': 50,
-      '21:00': 50,
-  }
-}
+import random
 
-tijdslot=filmCapaciteiten.values().keys()
-print(tijdslot)
+def analyseer():
+    klanten=[]
+    aantalKlanten=20
+    for i in range(aantalKlanten):
+        klantgeld = random.randint(1,10)
+        klantkoek = random.randint(1,10)
+        klantchips = random. randint(1,10)
+        klantwater = random. randint(1,10)
+        klantcola = random.randint(1,10)
+        klanten.append({'geld':klantgeld,'koek':klantkoek,'chips':klantchips,'water':klantwater,'cola':klantcola})
+    return klanten
+
+klanten=analyseer()
+print(klanten)
