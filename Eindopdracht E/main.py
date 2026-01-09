@@ -61,13 +61,21 @@ def resetlog():
     with open('Eindopdracht E/tickets.txt','w') as f:
         f.write(f'')
 
+def film_veranderd(naam):
+    global filmCapaciteiten
+    film = str(app.getOptionBox(naam))
+    if film in filmCapaciteiten:
+        app.setLabel('capaciteit', f'Nog {filmCapaciteiten[film]} plaatsen beschikbaar')
+    else:
+        app.setLabel('capaciteit', 'Nog niets geselecteerd!')
+
 
 app.setBg("#c7c7c7")
 
 
 app.addLabel('intro','Bioscoopticketautomaat')
 app.addLabel('capaciteit',f'Nog niets geselecteerd!')
-app.addOptionBox('filmkeuzes',['-Films-','Oppenheimer','Help!','Avatar'])
+app.addOptionBox('filmkeuzes',['-films-','Oppenheimer','Dune','Avatar'])
 app.addLabel('kindlabel','Aantal kinderen (€5)')
 app.addSpinBoxRange('kind',0,128)
 app.addLabel('volwassenelabel','Aantal volwassenen (€8)')
@@ -76,14 +84,13 @@ app.addLabel('student/65+label','Aantal studenten/65+\'ers (€6)')
 app.addSpinBoxRange('student/65+',0,128)
 app.addButton('koop',koop)
 app.addButton('reset tickets',resetlog)
+app.setOptionBoxChangeFunction('filmkeuzes', film_veranderd)
 
-simuleren=True
-aantalklanten=20
-if simuleren:
-    klanten=simulatie.simulateer(aantalklanten,list(filmCapaciteiten.keys()))
-    for klant in klanten:
-        koop('',True,klant)
-    print(filmCapaciteiten)
 
+klanten=simulatie.simulateer(20,list(filmCapaciteiten.keys()))
+for klant in klanten:
+    koop('',True,klant)
 app.go()
+
+
 
