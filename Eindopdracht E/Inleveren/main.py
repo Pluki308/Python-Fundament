@@ -10,10 +10,18 @@ en hoe vaak 'uitverkocht' voorkomt.
 
 
 from appJar import gui
-
-
-
 import random
+
+import os
+import sys
+
+def resource_path(filename):
+    if hasattr(sys, '_MEIPASS'):
+        return os.path.join(sys._MEIPASS, filename)
+    return os.path.join(os.path.dirname(__file__), filename)
+
+
+simulerend=True # of er gesimuleerd moet worden
 
 class Klant():
     def __init__(self, kinderen, volwassenen, studenten65, films):
@@ -23,11 +31,6 @@ class Klant():
 
         self.film = random.choice(list(films.keys()))
         self.tijdslot = random.choice(list(films[self.film].keys()))
-
-    def __repr__(self):
-        return (f"Klant(film={self.film}, tijdslot={self.tijdslot}, "
-                f"kinderen={self.kinderen}, volwassenen={self.volwassenen}, "
-                f"studenten65={self.studenten65})")
 
 
 def simuleer(aantalKlanten, films):
@@ -93,7 +96,7 @@ def koop(name,gesimuleerd=False,klant=None):
             app.setLabel('intro','Transactie succesvol!')
             app.after(3000, lambda: app.setLabel('intro','Bioscoopticketautomaat'))
         
-        with open('Eindopdracht E/tickets.txt','a') as f:
+        with open(resource_path('tickets.txt'),'a') as f:
             f.write(f'{filmkeuze}: {kind} kinderen, {volwassene} volwassenen, {student65} studenten/65+\'ers totale prijs: €{kind*5+volwassene*8+student65*6}. Plaatsen over: {capaciteit}\n')
 
             #f.write(f'{filmkeuze}, {kind}, {volwassene}, {student65}\n')
@@ -103,12 +106,12 @@ def koop(name,gesimuleerd=False,klant=None):
             
             app.setLabel('intro','Transactie onsuccesvol! Er zijn niet genoeg plaatsen bij de film.')
             app.after(5000, lambda: app.setLabel('intro','Bioscoopticketautomaat'))
-        with open('Eindopdracht E/tickets.txt','a') as f:
+        with open(resource_path('tickets.txt'),'a') as f:
             f.write(f'GEFAALD, TE WEINIG PLAATSEN: {filmkeuze}: {kind} kinderen, {volwassene} volwassenen, {student65} studenten/65+\'ers totale prijs: €{kind*5+volwassene*8+student65*6}. Plaatsen over: {capaciteit-(kind+volwassene+student65)}\n')
 
 
 def resetlog():
-    with open('Eindopdracht E/tickets.txt','w') as f:
+    with open(resource_path('tickets.txt'),'w') as f:
         f.write(f'')
 
 def film_veranderd(naam):
@@ -145,7 +148,7 @@ def analyseer(naam):
         klantennummers['volwassenen']+=klant.volwassenen
         klantennummers['studenten65']+=klant.studenten65
         filmnummers[klant.film]+=1
-
+    app.setLabel('groepen',f'aantal groepen: {len(klanten)}')
     app.setLabel('kinderen',f'aantal kinderen: {klantennummers["kinderen"]}')
     app.setLabel('volwassenen',f'aantal volwassenen: {klantennummers["volwassenen"]}')
     app.setLabel('studenten65',f'aantal studenten/65+\'ers: {klantennummers["studenten65"]}')
@@ -161,7 +164,7 @@ def analyseer(naam):
     
 oudefilm=''
 
-simulerend=True
+
 
 app.startFrame('kopen')
 app.setBg("#c7c7c7")
@@ -187,6 +190,7 @@ app.setOptionBoxChangeFunction('tijdslot', film_veranderd)
 app.stopFrame()
 app.startFrame('analyse')
 app.setBg("#c7c7c7")
+app.addLabel('groepen',f'aantal groepen: {0}')
 app.addLabel('kinderen',f'aantal kinderen: {0}')
 app.addLabel('volwassenen',f'aantal volwassenen: {0}')
 app.addLabel('studenten65',f'aantal studenten/65+\'ers: {0}')
@@ -195,13 +199,14 @@ app.addLabel('Oppenheimer',f'aantal Oppenheimer: {0}')
 app.addLabel('Dune',f'aantal Dune: {0}')
 app.addLabel('Avatar',f'aantal Avatar: {0}')
 app.addLabel('film',f'meest gekozen film: {None}')
+app.addButton('ga terug',lambda: (app.hideFrame('analyse'),app.showFrame('kopen')))
 app.stopFrame()
 app.hideFrame('analyse')
 
 
 if simulerend:
     aantalKlanten=30
-    resetlog()
+    #resetlog()
     klanten=simuleer(aantalKlanten,filmCapaciteiten)
     for klant in klanten:
         koop('',True,klant)
