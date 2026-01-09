@@ -1,13 +1,20 @@
-from appJar import gui
+filmCapaciteiten = {
+  'Oppenheimer': {
+      '15:00': 40,
+      '17:00': 40,
+      '21:00': 40,
+  },
+  'Dune': {
+      '15:00': 30,
+      '17:00': 30,
+      '21:00': 30,
+  },
+  'Avatar': {
+      '15:00': 50,
+      '17:00': 50,
+      '21:00': 50,
+  }
+}
 
-def option_changed(name):
-    print("Selected:", app.getOptionBox("options"))
-
-app = gui("OptionBox Example", "300x200")
-
-app.addLabel("title", "Choose an option:")
-app.addOptionBox("options", ["Apple", "Banana", "Cherry"])
-
-
-
-app.go()
+tijdslot=filmCapaciteiten.values().keys()
+print(tijdslot)
