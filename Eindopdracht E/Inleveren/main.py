@@ -158,7 +158,7 @@ def analyseer(naam):
     app.setLabel('Dune',f'aantal Dune: {filmnummers["Dune"]}, aantal keer uitverkocht: {uitverkocht["Dune"]}')
     app.setLabel('Avatar',f'aantal Avatar: {filmnummers["Avatar"]}, aantal keer uitverkocht: {uitverkocht["Avatar"]}')
     app.setLabel('film',f'meest gekozen film: {meeste_film}, aantal keer uitverkocht in totaal: {uitverkocht["Oppenheimer"]+uitverkocht["Dune"]+uitverkocht["Avatar"]}')
-    
+
     
 
     

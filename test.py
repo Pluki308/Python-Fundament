@@ -1,16 +1,18 @@
+from appJar import gui
 import random
+import string
 
-def analyseer():
-    klanten=[]
-    aantalKlanten=20
-    for i in range(aantalKlanten):
-        klantgeld = random.randint(1,10)
-        klantkoek = random.randint(1,10)
-        klantchips = random. randint(1,10)
-        klantwater = random. randint(1,10)
-        klantcola = random.randint(1,10)
-        klanten.append({'geld':klantgeld,'koek':klantkoek,'chips':klantchips,'water':klantwater,'cola':klantcola})
-    return klanten
 
-klanten=analyseer()
-print(klanten)
+
+def buttonKlik():
+  app.setLabel('postcode',f'{random.randint(1000,9999)}{random.choice(string.ascii_uppercase)}{random.choice(string.ascii_uppercase)}')
+
+letter = random.choice(string.ascii_uppercase)
+
+app = gui("Buttons", "300x150")
+
+app.setBg("#c7c7c7")
+
+app.addLabel("postcode", "Welkom!")
+app.addButton("Klik mij!", buttonKlik)
+app.go()
